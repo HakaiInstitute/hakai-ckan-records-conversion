@@ -2,7 +2,7 @@ import pytest
 import requests
 from click.testing import CliRunner
 
-from hakai_ckan_records_conversion import convention_cff, erddap
+from hakai_ckan_records_conversion import citation_cff, erddap
 from hakai_ckan_records_conversion.__main__ import main as convert_records
 from hakai_ckan_records_conversion.ckan import CKAN
 
@@ -73,12 +73,12 @@ def test_get_record_json(ckan_url, record_id, tmp_path, output_format):
 
 
 def test_get_record_cff(record):
-    cff = convention_cff.convention_cff(record)
+    cff = citation_cff.convention_cff(record, output_format=None)
     assert cff
-    assert cff["title"] == "Convention for the File Format"
-    assert cff["version"] == "1.2.0"
-    assert cff["date"] == "2018-06-25"
-    assert cff["authors"] == [{"name": "Hakai Institute", "email": ""}]
+    assert cff["title"]
+    assert cff["cff-version"]
+    assert cff["abstract"]
+    assert cff["authors"]
 
 
 def test_get_record_erddap_dataset_xml(record):

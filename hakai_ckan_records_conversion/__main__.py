@@ -4,14 +4,14 @@ import click
 import yaml
 from loguru import logger
 
-from hakai_ckan_records_conversion import convention_cff, erddap
+from hakai_ckan_records_conversion import citation_cff, erddap
 from hakai_ckan_records_conversion.ckan import CKAN
 
 standard_formats = {
     "json": lambda x: json.dumps(x, indent=2),
     "yaml": lambda x: yaml.dump(x, default_flow_style=False),
     "erddap": erddap.dataset_xml,
-    "cff": convention_cff.convention_cff,
+    "cff": citation_cff.convention_cff,
 }
 
 
@@ -33,6 +33,7 @@ standard_formats = {
     type=click.Choice(list(standard_formats.keys())),
 )
 @click.option("--output-file", required=True, help="Output file.")
+@logger.catch(reraise=True)
 def main(ckan_server, dataset_ids, output_format, output_file):
     """Convert CKAN records to different metadata formats or standards."""
     ckan = CKAN(ckan_server)
