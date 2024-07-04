@@ -1,0 +1,21 @@
+[tool.poetry]
+name = "hakai-ckan-records-conversion"
+version = "0.1.0"
+description = ""
+authors = ["Jessy Barrette <30420025+JessyBarrette@users.noreply.github.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+click = "^8.1.7"
+loguru = "^0.7.2"
+pyyaml = "^6.0.1"
+requests = "^2.32.3"
+
+
+[tool.poetry.group.dev.dependencies]
+pytest = "^8.2.2"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
