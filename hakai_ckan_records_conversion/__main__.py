@@ -30,7 +30,7 @@ standard_formats = {
     "--output-format",
     required=True,
     help="Output format (json or yaml).",
-    type=click.Choice(standard_formats.keys()),
+    type=click.Choice(list(standard_formats.keys())),
 )
 @click.option("--output-file", required=True, help="Output file.")
 def main(ckan_server, dataset_ids, output_format, output_file):
