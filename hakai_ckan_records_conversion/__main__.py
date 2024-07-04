@@ -1,7 +1,9 @@
+import json
+
 import click
 import yaml
-import json
 from loguru import logger
+
 from . import convention_cff, erddap
 from .ckan import CKAN
 
@@ -11,8 +13,6 @@ standard_formats = {
     "erddap": erddap.dataset_xml,
     "cff": convention_cff.convention_cff,
 }
-
-
 
 
 @click.command()

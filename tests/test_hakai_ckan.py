@@ -1,11 +1,10 @@
 import pytest
 import requests
-
 from click.testing import CliRunner
 
 from hakai_ckan_records_conversion import convention_cff, erddap
-from hakai_ckan_records_conversion.ckan import CKAN
 from hakai_ckan_records_conversion.__main__ import main as convert_records
+from hakai_ckan_records_conversion.ckan import CKAN
 
 
 @pytest.fixture
@@ -40,22 +39,32 @@ def test_get_record(ckan, record_id):
     assert record["title"] == "Hakai Inisostitute - CTD Data"
     assert record["name"] == "hakai-institute-ctd-data"
     assert record["state"] == "active"
-    assert record["private"] == False
+    assert not record["private"]
     assert record["revision_id"] == "d0d1c1b5-6e4b-4a6d-8d0d-7b5d8d0d1c1b"
     assert record["type"] == "dataset"
     assert record["owner_org"] == "hakai"
     assert record["author"] == "Hakai Institute"
 
 
-@pytest.mark.parametrize("output_format", ["json", "yaml","erddap","cff"])
+@pytest.mark.parametrize("output_format", ["json", "yaml", "erddap", "cff"])
 def test_get_record_json(ckan_url, record_id, tmp_path, output_format):
     output_file = tmp_path / f"output.{output_format}"
     runner = CliRunner()
-    result = runner.invoke(convert_records, ["--ckan-server",ckan_url, "--dataset-ids",record_id, "--output-format",output_format, "--output-file", str(output_file)]) 
+    result = runner.invoke(
+        convert_records,
+        [
+            "--ckan-server",
+            ckan_url,
+            "--dataset-ids",
+            record_id,
+            "--output-format",
+            output_format,
+            "--output-file",
+            str(output_file),
+        ],
+    )
     assert result.exit_code == 0, result.output
     assert output_file.exists()
-    
-
 
 
 def test_get_record_cff(record):
@@ -70,5 +79,3 @@ def test_get_record_cff(record):
 def test_get_record_erddap_dataset_xml(record):
     dataset_xml = erddap.dataset_xml(record)
     assert dataset_xml
-
-

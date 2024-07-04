@@ -1,5 +1,6 @@
 import yaml
 
+
 def convention_cff(record):
     record = {
         "title": "Convention for the File Format",
