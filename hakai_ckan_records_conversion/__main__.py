@@ -4,8 +4,8 @@ import click
 import yaml
 from loguru import logger
 
-from . import convention_cff, erddap
-from .ckan import CKAN
+from hakai_ckan_records_conversion import convention_cff, erddap
+from hakai_ckan_records_conversion.ckan import CKAN
 
 standard_formats = {
     "json": lambda x: json.dumps(x, indent=2),
@@ -34,6 +34,7 @@ standard_formats = {
 )
 @click.option("--output-file", required=True, help="Output file.")
 def main(ckan_server, dataset_ids, output_format, output_file):
+    """Convert CKAN records to different metadata formats or standards."""
     ckan = CKAN(ckan_server)
     for dataset_id in dataset_ids:
         logger.debug(f"Retrieving dataset {dataset_id}")
@@ -50,3 +51,6 @@ def main(ckan_server, dataset_ids, output_format, output_file):
                 f.write(converted)
         else:
             print(converted)
+
+if __name__ == "__main__":
+    main()
