@@ -56,23 +56,15 @@ inputs:
 runs:
   using: "composite"
   steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
-
+    
     - name: Set up Python 3.11
       uses: actions/setup-python@v5
       with:
         python-version: 3.11
 
-    - name: Install Poetry
-      shell: bash
-      run: |
-        curl -sSL https://install.python-poetry.org | python3 -
-        export PATH="$HOME/.poetry/bin:$PATH"
-
     - name: Install dependencies
       shell: bash
-      run: poetry install
+      run: pip install git+https://github.com/HakaiInstitute/hakai-ckan-records-conversion.git
 
     - name: Run conversion
       shell: bash
