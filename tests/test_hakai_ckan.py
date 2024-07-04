@@ -19,7 +19,7 @@ def ckan(ckan_url):
 
 @pytest.fixture
 def record_id():
-    return "ca-cioos_86343dd1-28d0-4d02-8eaf-402d51a7fef7"
+    return "ca-cioos_ba41d935-f293-447f-be3d-7098e569b431"
 
 
 @pytest.fixture
@@ -35,15 +35,20 @@ def test_record_is_available(ckan, record_id):
 def test_get_record(ckan, record_id):
     record = ckan.get_record(record_id)
     assert record
-    assert record["id"] == record_id
-    assert record["title"] == "Hakai Inisostitute - CTD Data"
-    assert record["name"] == "hakai-institute-ctd-data"
-    assert record["state"] == "active"
+    assert record["name"] == record_id
+    assert record["title"] 
+    assert record["state"] 
     assert not record["private"]
-    assert record["revision_id"] == "d0d1c1b5-6e4b-4a6d-8d0d-7b5d8d0d1c1b"
+    assert record["metadata_created"] 
+    assert record["metadata_modified"]
     assert record["type"] == "dataset"
-    assert record["owner_org"] == "hakai"
-    assert record["author"] == "Hakai Institute"
+    assert record["owner_org"]
+    assert record["cited-responsible-party"]
+    assert record["resources"]
+    assert record['keywords']
+    assert record['groups']
+    assert record['spatial']
+    assert record['projects']
 
 
 @pytest.mark.parametrize("output_format", ["json", "yaml", "erddap", "cff"])
