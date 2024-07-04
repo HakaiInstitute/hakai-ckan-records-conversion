@@ -1,2 +1,2 @@
 def dataset_xml(record):
-    pass
+    return """<erddapDatasets>"""

@@ -1,5 +1,7 @@
+import yaml
+
 def convention_cff(record):
-    return {
+    record = {
         "title": "Convention for the File Format",
         "version": "1.2.0",
         "date": "2018-06-25",
@@ -10,3 +12,4 @@ def convention_cff(record):
             }
         ],
     }
+    return yaml.dump(record, default_flow_style=False)

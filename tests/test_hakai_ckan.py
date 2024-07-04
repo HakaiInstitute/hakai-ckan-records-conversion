@@ -1,9 +1,11 @@
 import pytest
 import requests
 
+from click.testing import CliRunner
+
 from hakai_ckan_records_conversion import convention_cff, erddap
 from hakai_ckan_records_conversion.ckan import CKAN
-from hakai_ckan_records_conversion.__main__ import standard_formats
+from hakai_ckan_records_conversion.__main__ import main as convert_records
 
 
 @pytest.fixture
@@ -44,11 +46,14 @@ def test_get_record(ckan, record_id):
     assert record["owner_org"] == "hakai"
     assert record["author"] == "Hakai Institute"
 
-def test_get_record_json(record, tmp_path):
-    output_file = tmp_path / "output.json"
-    output_format = "json"
-    converter = standard_formats[output_format]
-    assert record
+
+@pytest.mark.parametrize("output_format", ["json", "yaml","erddap","cff"])
+def test_get_record_json(ckan_url, record_id, tmp_path, output_format):
+    output_file = tmp_path / f"output.{output_format}"
+    runner = CliRunner()
+    result = runner.invoke(convert_records, ["--ckan-server",ckan_url, "--dataset-ids",record_id, "--output-format",output_format, "--output-file", str(output_file)]) 
+    assert result.exit_code == 0, result.output
+    assert output_file.exists()
     
 
 

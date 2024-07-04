@@ -1,15 +1,18 @@
 import click
 import yaml
+import json
 from loguru import logger
 from . import convention_cff, erddap
 from .ckan import CKAN
 
 standard_formats = {
-    "json": lambda x: x,
+    "json": lambda x: json.dumps(x, indent=2),
     "yaml": lambda x: yaml.dump(x, default_flow_style=False),
     "erddap": erddap.dataset_xml,
     "cff": convention_cff.convention_cff,
 }
+
+
 
 
 @click.command()
