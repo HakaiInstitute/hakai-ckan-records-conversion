@@ -22,11 +22,11 @@ inputs:
     required: false
     default: 'true'
   branch:
-    description: 'Branch to commit the outputs to'
+    description: 'The pull request branch name.'
     required: false
     default: 'main'
   branch-suffix:
-    description: 'Suffix to append to the branch name'
+    description: 'The branch suffix type when using the alternative branching strategy. Valid values are random, timestamp and short-commit-hash.'
     required: false
     default: 'timestamp'
   token:
@@ -34,7 +34,7 @@ inputs:
     required: true
     default: ${{ github.token }}
   base:
-    description: 'Base branch to create the pull request against'
+    description: 'Sets the pull request base branch.'
     required: false
     default: 'fix-contribution-cff'
   labels:
