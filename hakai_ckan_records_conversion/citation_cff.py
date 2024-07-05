@@ -12,7 +12,7 @@ def get_cff_author(author):
     return {
         "name": author["individual-name"],
         "email": author["contact-info_email"],
-        "role": ','.join(author["role"]),
+        "role": ','.join(author["role"]) if isinstance(author["role"], list) else author["role"],
         "affiliation": author["organisation-name"],
         "orcid": author.get("individual-uri_code"),
         "orgniasation": author.get("organisation-name"),
