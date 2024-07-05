@@ -25,18 +25,14 @@ inputs:
     description: 'The pull request branch name.'
     required: false
     default: 'main'
-  branch-suffix:
-    description: 'The branch suffix type when using the alternative branching strategy. Valid values are random, timestamp and short-commit-hash.'
-    required: false
-    default: 'timestamp'
-  token:
-    description: 'GitHub token'
-    required: true
-    default: ${{ github.token }}
   base:
     description: 'Sets the pull request base branch.'
     required: false
     default: 'fix-contribution-cff'
+  token:
+    description: 'GitHub token'
+    required: true
+    default: ${{ github.token }}
   labels:
     description: 'Labels to add to the pull request'
     required: false
@@ -60,7 +56,7 @@ inputs:
 runs:
   using: "composite"
   steps:
-    
+
     - name: Set up Python 3.11
       uses: actions/setup-python@v5
       with:
@@ -78,6 +74,13 @@ runs:
         --record-id ${{ inputs.record-id }} \
         --output-file ${{ inputs.output }} \
         --output-format ${{ inputs.output-format }}
+
+    - name: Create base branch from branch ${{ inputs.branch }} and push it to origin
+      shell: bash
+      run: |
+        git checkout -b ${{ inputs.base }} ${{ inputs.branch }}|
+        git push origin ${{ inputs.base }}
+
     - name: Commit outputs
       uses: peter-evans/create-pull-request@v6
       with:
