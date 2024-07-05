@@ -75,13 +75,6 @@ runs:
         --output-file ${{ inputs.output }} \
         --output-format ${{ inputs.output-format }}
 
-    - name: Create base branch from branch ${{ inputs.branch }} and push it to origin
-      shell: bash
-      run: |
-        git checkout ${{ inputs.branch }}
-        git checkout -b ${{ inputs.base }}
-        git push
-
     - name: Commit outputs
       uses: peter-evans/create-pull-request@v6
       with:
