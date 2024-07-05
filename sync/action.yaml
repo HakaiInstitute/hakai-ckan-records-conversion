@@ -12,7 +12,7 @@ inputs:
   output:
     description: 'The output of the action'
     required: false
-    default: 'contribution.cff'
+    default: 'citation.cff'
   output-format:
     description: 'The format of the outputs'
     required: false
