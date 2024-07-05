@@ -78,7 +78,7 @@ runs:
         OUTPUTS: ${{ inputs.outputs }}
         OUTPUTS_FORMAT: ${{ inputs.outputs-format }}
       run: |
-        python hakai_ckan_records_conversion \
+        hakai_ckan_records_conversion \
         --ckan-server $CKAN_SERVER \
         --record-id $RECORD_ID \
         --outputs $OUTPUTS \
