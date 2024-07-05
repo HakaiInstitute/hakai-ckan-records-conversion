@@ -2,18 +2,18 @@
 name: Synchronize CKAN record to dataset repository contribution.cff
 description: 'This action synchronizes a CKAN record to a dataset repository contribution.cff file.'
 inputs:
-  ckan_server:
+  ckan-server:
     description: 'CKAN server URL'
     required: false
     default: 'https://catalogue.hakai.org'
-  record_id:
+  record-id:
     description: 'Eye color of the Octocats'
     required: true
   outputs:
     description: 'The outputs of the action'
     required: false
     default: 'contribution.cff'
-  outputs_format:
+  outputs-format:
     description: 'The format of the outputs'
     required: false
     default: 'cff'
@@ -25,7 +25,7 @@ inputs:
     description: 'Branch to commit the outputs to'
     required: false
     default: 'main'
-  branch_suffix:
+  branch-suffix:
     description: 'Suffix to append to the branch name'
     required: false
     default: 'update-contribution-cff'
@@ -41,6 +41,10 @@ inputs:
     description: 'Labels to add to the pull request'
     required: false
     default: 'automated'
+  commit-message:
+    description: 'Commit message'
+    required: false
+    default: 'Update contribution.cff'
   title:
     description: 'Title of the pull request'
     required: false
@@ -69,21 +73,26 @@ runs:
 
     - name: Run conversion
       shell: bash
+      env:
+        CKAN_SERVER: ${{ inputs.ckan-server }}
+        RECORD_ID: ${{ inputs.record-id }}
+        OUTPUTS: ${{ inputs.outputs }}
+        OUTPUTS_FORMAT: ${{ inputs.outputs-format }}
       run: |
         poetry run python hakai_ckan_records_conversion \
-        --ckan-server ${{ inputs.ckan_server }} \
-        --record-id ${{ inputs.record_id }} \
-        --outputs ${{ inputs.outputs }} \
-        --outputs-format ${{ inputs.outputs_format }}
+        --ckan-server $CKAN_SERVER \
+        --record-id $RECORD_ID \
+        --outputs $OUTPUTS \
+        --outputs-format $OUTPUTS_FORMAT
 
     - name: Commit outputs
       uses: peter-evans/create-pull-request@v6
       with:
-        commit-message: 'Update contribution.cff'
+        commit-message: ${{ inputs.commit-message }}
         title: ${{ inputs.title }}
         body: ${{ inputs.body }}
         branch: ${{ inputs.branch }}
         token: ${{ input.token }}
         base: ${{ inputs.base }}
-        branch-suffix: ${{ inputs.branch_suffix }}
+        branch-suffix: ${{ inputs.branch-suffix }}
         labels: ${{ inputs.labels }}
