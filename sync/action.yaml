@@ -25,6 +25,10 @@ inputs:
     description: 'Branch to commit the outputs to'
     required: false
     default: 'main'
+  branch-suffix:
+    description: 'Suffix to append to the branch name'
+    required: false
+    default: 'timestamp'
   token:
     description: 'GitHub token'
     required: true
@@ -83,4 +87,5 @@ runs:
         branch: ${{ inputs.branch }}
         token: ${{ inputs.token }}
         base: ${{ inputs.base }}
+        branch-suffix: ${{ inputs.branch-suffix }}
         labels: ${{ inputs.labels }}
