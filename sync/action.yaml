@@ -13,7 +13,7 @@ inputs:
     description: 'The outputs of the action'
     required: false
     default: 'contribution.cff'
-  outputs-format:
+  outputs_format:
     description: 'The format of the outputs'
     required: false
     default: 'cff'
@@ -74,7 +74,7 @@ runs:
         --ckan-server ${{ inputs.ckan_server }} \
         --record-id ${{ inputs.record_id }} \
         --outputs ${{ inputs.outputs }} \
-        --outputs-format ${{ inputs.outputs-format }}
+        --outputs-format ${{ inputs.outputs_format }}
 
     - name: Commit outputs
       uses: peter-evans/create-pull-request@v6
