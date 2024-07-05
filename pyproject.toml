@@ -25,3 +25,6 @@ black = "^24.4.2"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.scripts]
+hakai_ckan_records_conversion = "hakai_ckan_records_conversion.__main__:main"
