@@ -9,11 +9,11 @@ inputs:
   record-id:
     description: 'Catalogue record ID to synchronize'
     required: true
-  outputs:
-    description: 'The outputs of the action'
+  output:
+    description: 'The output of the action'
     required: false
     default: 'contribution.cff'
-  outputs-format:
+  output-format:
     description: 'The format of the outputs'
     required: false
     default: 'cff'
@@ -75,9 +75,9 @@ runs:
       run: |
         hakai_ckan_records_conversion \
         --ckan-server ${{ inputs.ckan-server }} \
-        --record-ids ${{ inputs.record-id }} \
-        --outputs ${{ inputs.outputs }} \
-        --outputs-format ${{ inputs.outputs-format }}
+        --record-id ${{ inputs.record-id }} \
+        --output-file ${{ inputs.output }} \
+        --output-format ${{ inputs.output-format }}
     - name: Commit outputs
       uses: peter-evans/create-pull-request@v6
       with:
