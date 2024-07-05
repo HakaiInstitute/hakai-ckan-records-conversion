@@ -36,16 +36,17 @@ standard_formats = {
 def main(ckan_server, record_id, output_format, output_file):
     """Convert CKAN records to different metadata formats or standards."""
     ckan = CKAN(ckan_server)
-    logger.debug(f"Retrieving dataset {record_id}")
+    logger.info(f"Retrieving dataset {record_id}")
     record = ckan.get_record(record_id)
     if not record:
         logger.error(f"Dataset {record_id} not found.")
 
-    logger.debug(f"Converting dataset {record_id}")
+    logger.info(f"Converting dataset {record_id}")
     converter = standard_formats[output_format]
     converted = converter(record)
 
     if output_file:
+        logger.info("Writing to file {output_file}")
         with open(output_file, "w") as f:
             f.write(converted)
     else:
