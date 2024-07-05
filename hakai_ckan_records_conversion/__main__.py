@@ -20,7 +20,7 @@ standard_formats = {
     "--ckan-server", required=True, help="URL of the CKAN server.", envvar="CKAN_SERVER"
 )
 @click.option(
-    "--dataset-ids",
+    "--record-ids",
     required=True,
     help="IDs of the datasets to retrieve.",
     multiple=True,
@@ -34,10 +34,10 @@ standard_formats = {
 )
 @click.option("--output-file", required=True, help="Output file.")
 @logger.catch(reraise=True)
-def main(ckan_server, dataset_ids, output_format, output_file):
+def main(ckan_server, record_ids, output_format, output_file):
     """Convert CKAN records to different metadata formats or standards."""
     ckan = CKAN(ckan_server)
-    for dataset_id in dataset_ids:
+    for dataset_id in record_ids:
         logger.debug(f"Retrieving dataset {dataset_id}")
         record = ckan.get_record(dataset_id)
         if not record:

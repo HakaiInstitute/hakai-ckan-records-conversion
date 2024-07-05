@@ -60,7 +60,7 @@ def test_get_record_json(ckan_url, record_id, tmp_path, output_format):
         [
             "--ckan-server",
             ckan_url,
-            "--dataset-ids",
+            "--record-ids",
             record_id,
             "--output-format",
             output_format,
