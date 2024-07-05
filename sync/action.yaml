@@ -78,8 +78,9 @@ runs:
     - name: Create base branch from branch ${{ inputs.branch }} and push it to origin
       shell: bash
       run: |
-        git checkout -b ${{ inputs.base }} ${{ inputs.branch }}|
-        git push origin ${{ inputs.base }}
+        git checkout ${{ inputs.branch }}
+        git checkout -b ${{ inputs.base }}
+        git push
 
     - name: Commit outputs
       uses: peter-evans/create-pull-request@v6
