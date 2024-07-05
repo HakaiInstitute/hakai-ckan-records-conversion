@@ -25,10 +25,6 @@ inputs:
     description: 'Branch to commit the outputs to'
     required: false
     default: 'main'
-  branch-suffix:
-    description: 'Suffix to append to the branch name'
-    required: false
-    default: 'update-contribution-cff'
   token:
     description: 'GitHub token'
     required: true
@@ -36,7 +32,7 @@ inputs:
   base:
     description: 'Base branch to create the pull request against'
     required: false
-    default: 'main'
+    default: 'fix-contribution-cff'
   labels:
     description: 'Labels to add to the pull request'
     required: false
@@ -87,5 +83,4 @@ runs:
         branch: ${{ inputs.branch }}
         token: ${{ inputs.token }}
         base: ${{ inputs.base }}
-        branch-suffix: ${{ inputs.branch-suffix }}
         labels: ${{ inputs.labels }}
