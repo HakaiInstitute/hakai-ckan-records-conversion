@@ -83,7 +83,6 @@ runs:
         --record-id $RECORD_ID \
         --outputs $OUTPUTS \
         --outputs-format $OUTPUTS_FORMAT
-
     - name: Commit outputs
       uses: peter-evans/create-pull-request@v6
       with:
