@@ -24,11 +24,11 @@ inputs:
   branch:
     description: 'The pull request branch name.'
     required: false
-    default: 'main'
+    default: 'fix-contribution-cff'
   base:
     description: 'Sets the pull request base branch.'
     required: false
-    default: 'fix-contribution-cff'
+    default: 'main'
   token:
     description: 'GitHub token'
     required: true
@@ -89,7 +89,7 @@ runs:
         title: ${{ inputs.title }}
         body: ${{ inputs.body }}
         branch: ${{ inputs.branch }}
-        token: ${{ inputs.token }}
         base: ${{ inputs.base }}
         branch-suffix: ${{ inputs.branch-suffix }}
+        token: ${{ inputs.token }}
         labels: ${{ inputs.labels }}
