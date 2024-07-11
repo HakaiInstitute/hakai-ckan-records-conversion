@@ -1,5 +1,8 @@
 # CKAN Metadata Format Generator
 
+:warning: We recommand using the [hakai-metadata-conversion](https://github.com/HakaiInstitute/hakai-metadata-conversion) [^1] :warning:
+[^1]: The [hakai-metadata-conversion](https://github.com/HakaiInstitute/hakai-metadata-conversion) relies on the original metadata form schema instead of the CKAN one.
+
 This project provides a tool to generate various metadata formats and standards
 from CKAN (Comprehensive Knowledge Archive Network) catalog records. It aims to
 facilitate the sharing and citation of datasets by converting CKAN metadata into
